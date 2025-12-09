@@ -1,0 +1,88 @@
+---
+title: Introduction to Tiew Hoe Ting Documentation
+description: Welcome to Tiew Hoe Ting's documentation platform, your default space for organizing and managing project documentation efficiently.
+---
+
+## Overview
+
+Tiew Hoe Ting Documentation provides a centralized platform where you create, organize, and manage all your project documentation. You access a clean interface to build MDX-powered pages, collaborate with teams, and publish updates seamlessly. This space serves as your default hub for technical docs, guides, and API references.
+
+## Key Features
+
+Tiew Hoe Ting offers powerful tools to streamline your documentation workflow.
+
+<Columns cols={3}>
+  <Card title="MDX Support" icon="code" href="/docs/mdx-guide">
+    Write rich pages using MDX with components like `<Callout>` and `<Steps>`. Embed interactive elements directly in your markdown.
+  </Card>
+  <Card title="Version Control" icon="git-branch" href="/docs/versioning">
+    Track changes with Git integration. Roll back versions and collaborate without conflicts.
+  </Card>
+  <Card title="Search & Navigation" icon="search" href="/docs/search">
+    Full-text search across all pages. Sidebar navigation keeps you oriented.
+  </Card>
+</Columns>
+
+<Callout kind="tip">
+  Customize your docs with the brand color `#3B82F6` for headers and accents to match your project identity.
+</Callout>
+
+## Benefits
+
+You gain efficiency by consolidating scattered notes into one searchable space. Teams collaborate in real-time, reducing onboarding time for new members. Publish updates instantly without rebuilding sites.
+
+## How to Use This Documentation
+
+Follow these steps to navigate and contribute effectively.
+
+<Steps>
+  <Step title="Browse Topics" icon="book-open">
+    Use the sidebar to explore sections like guides and APIs. Click any link to jump directly.
+  </Step>
+  <Step title="Search Content" icon="search">
+    Enter keywords in the top search bar. Results highlight relevant pages instantly.
+  </Step>
+  <Step title="Edit Pages" icon="edit-3">
+    Fork the repo or use the edit button on any page. Submit pull requests for reviews.
+  </Step>
+</Steps>
+
+## Platform-Specific Navigation
+
+<Tabs>
+  <Tab title="Desktop" icon="monitor">
+    Hover over sidebar items for previews. Use keyboard shortcuts like `<kbd>Ctrl</kbd>+<kbd>K</kbd>` for quick search.
+  </Tab>
+  <Tab title="Mobile" icon="smartphone">
+    Tap the menu icon to expand the sidebar. Swipe left on pages for navigation history.
+  </Tab>
+</Tabs>
+
+## Contributing Code Examples
+
+When adding custom components, use this pattern for multi-language setups.
+
+<CodeGroup tabs="JavaScript,Python">
+  ```javascript
+  // Import and use a custom hook
+  import { useDocs } from '@tiewhoeting/docs';
+
+  function MyPage() {
+    const { pages } = useDocs();
+    return <div>{pages.length} docs available</div>;
+  }
+  ```
+  ```python
+  # Flask example for serving docs
+  from flask import Flask
+  app = Flask(__name__)
+
+  @app.route('/docs')
+  def docs():
+      return {'message': 'Tiew Hoe Ting docs served'}
+  ```
+</CodeGroup>
+
+<Expandable title="Advanced Customization" default-open="false">
+  Override themes by setting CSS variables like `--brand-color: #3B82F6;`. Integrate with CI/CD pipelines for auto-publishing.
+</Expandable>

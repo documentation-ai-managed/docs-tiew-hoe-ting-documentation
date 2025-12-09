@@ -1,0 +1,174 @@
+---
+title: Configuration and Customization
+description: Learn how to tailor your Tiew Hoe Ting documentation space to fit your needs.
+---
+
+## Theme and Branding Options
+
+Customize your Tiew Hoe Ting documentation to match your brand. Update colors, logos, and fonts through the configuration file or dashboard settings.
+
+<Columns cols={2}>
+  <Card title="Primary Color" icon="palette" href="#primary-color">
+    Set your brand color like `#3B82F6`.
+  </Card>
+  <Card title="Logo Upload" icon="image" href="#logo">
+    Replace the default logo with your own.
+  </Card>
+  <Card title="Font Customization" icon="type" href="#fonts">
+    Choose from Google Fonts or custom uploads.
+  </Card>
+  <Card title="Dark Mode" icon="moon" href="#dark-mode">
+    Enable automatic dark mode detection.
+  </Card>
+</Columns>
+
+### Update Primary Color
+
+Follow these steps to change the primary brand color.
+
+<Steps>
+  <Step title="Access Settings" icon="settings">
+    Navigate to **Dashboard > Configuration > Theme**.
+  </Step>
+  <Step title="Edit CSS Variables" icon="code">
+    Open your `theme.config.js` file and update the primary color.
+
+````javascript
+export default {
+  theme: {
+    colors: {
+      primary: '#3B82F6',  // Your brand blue
+      secondary: '#1E40AF',
+    },
+  },
+};
+````
+  </Step>
+  <Step title="Save and Deploy" icon="save">
+    Commit changes and redeploy your site.
+  </Step>
+</Steps>
+
+<Callout kind="tip">
+  Use HEX, RGB, or HSL formats for colors. Test in both light and dark modes.
+</Callout>
+
+## User Permissions and Access
+
+Control who views and edits your documentation. Tiew Hoe Ting supports role-based access control (RBAC) with four default roles.
+
+| Role       | View Pages | Edit Content | Manage Users | Admin Settings |
+|------------|------------|--------------|--------------|----------------|
+| Viewer    | ✅        | ❌           | ❌           | ❌             |
+| Editor    | ✅        | ✅           | ❌           | ❌             |
+| Manager   | ✅        | ✅           | ✅           | ❌             |
+| Admin     | ✅        | ✅           | ✅           | ✅             |
+
+### Assign Roles
+
+<Tabs>
+  <Tab title="Dashboard UI" icon="monitor">
+    1. Go to **Users > Permissions**.
+    2. Select a user.
+    3. Choose role from dropdown.
+  </Tab>
+  <Tab title="API" icon="api">
+    Use the permissions endpoint.
+
+<Request tabs="cURL,JavaScript">
+```bash
+curl -X POST https://api.tiewhoeting.com/v1/permissions \
+  -H "Authorization: Bearer {YOUR_TOKEN}" \
+  -H "Content-Type: application/json" \
+  -d '{
+    "userId": "user_123",
+    "role": "editor"
+  }'
+```
+
+```javascript
+const response = await fetch('https://api.tiewhoeting.com/v1/permissions', {
+  method: 'POST',
+  headers: {
+    'Authorization': `Bearer ${API_TOKEN}`,
+    'Content-Type': 'application/json',
+  },
+  body: JSON.stringify({
+    userId: 'user_123',
+    role: 'editor',
+  }),
+});
+```
+</Request>
+  </Tab>
+</Tabs>
+
+## Integration Settings
+
+Connect Tiew Hoe Ting to external services like GitHub, Slack, or webhooks for seamless workflows.
+
+<ExpandableGroup>
+  <Expandable title="GitHub Integration" default-open="true">
+    Sync repositories automatically.
+
+<CodeGroup tabs="YAML,JSON">
+```yaml
+integrations:
+  github:
+    repo: "your-org/docs-site"
+    branch: "main"
+    webhookSecret: "gh_abc123"
+```
+
+```json
+{
+  "integrations": {
+    "github": {
+      "repo": "your-org/docs-site",
+      "branch": "main",
+      "webhookSecret": "gh_abc123"
+    }
+  }
+}
+```
+</CodeGroup>
+  </Expandable>
+
+  <Expandable title="Slack Notifications">
+    Get alerts for new deployments.
+
+```javascript
+// Add to your config
+module.exports = {
+  integrations: {
+    slack: {
+      webhookUrl: 'https://hooks.slack.com/services/T00000000/B00000000/XXXXXXXXXXXXXXXXXXXXXXXX'
+    }
+  }
+};
+```
+  </Expandable>
+</ExpandableGroup>
+
+<Callout kind="alert">
+  Store secrets securely using environment variables like `{SLACK_WEBHOOK_URL}` instead of hardcoding them.
+</Callout>
+
+### Advanced Customizations
+
+For custom CSS or JavaScript, edit `custom.css` and `custom.js` in your project root.
+
+````css
+/* custom.css */
+:root {
+  --primary-color: #3B82F6;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root {
+    --primary-color: #60A5FA;
+  }
+}
+````
+
+These changes propagate instantly after redeploying. Review audit logs in the dashboard for all configuration updates.

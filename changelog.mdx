@@ -1,0 +1,161 @@
+---
+title: Changelog
+description: Track updates, new features, and improvements in Tiew Hoe Ting Documentation.
+---
+
+## Overview
+
+Stay current with the latest enhancements in Tiew Hoe Ting Documentation. You access version history, new features, bug fixes, and breaking changes here. Review recent releases to understand impacts on your projects.
+
+<Columns cols={3}>
+  <Card title="Latest Release" icon="zap" href="#latest">
+    Discover v1.2.0 features and upgrades.
+  </Card>
+  <Card title="Upgrade Guide" icon="settings" href="#upgrading">
+    Follow steps to update your installation.
+  </Card>
+  <Card title="Contribute" icon="github" href="https://github.com/tiewhoeting/docs" target="_blank">
+    Report issues or submit pull requests.
+  </Card>
+</Columns>
+
+<Callout kind="info">
+  Subscribe to our RSS feed or GitHub releases for instant notifications on new versions.
+</Callout>
+
+## Recent Releases
+
+### v1.2.0 - Latest
+
+<Update label="2024-10-15" description="v1.2.0" tags={["feature", "bugfix"]}>
+
+## New Features
+
+- Added real-time collaboration for shared docs
+- Introduced custom brand color support (`#3B82F6` default)
+
+## Improvements
+
+- Enhanced search with fuzzy matching
+- Optimized rendering for large MDX files
+
+## Bug Fixes
+
+- Fixed parsing errors with nested `{code}` blocks
+- Resolved mobile layout shifts on Tabs components
+
+</Update>
+
+### v1.1.0
+
+<Update label="2024-09-20" description="v1.1.0" tags={["feature", "improvement"]}>
+
+## New Features
+
+- Integrated Mermaid diagram support (code blocks only)
+- Added dark mode toggle in settings
+
+## Improvements
+
+- Faster page loads with lazy component rendering
+- Better accessibility for screen readers
+
+## Breaking Changes
+
+- Updated ParamField syntax; use single location attribute only
+
+</Update>
+
+### v1.0.0
+
+<Update label="2024-08-10" description="v1.0.0" tags={["feature", "breaking"]}>
+
+## New Features
+
+- Core MDX components: Steps, Tabs, Cards, Columns
+- YAML frontmatter validation
+- Lucide icon library integration
+
+## Initial Setup
+
+- Basic documentation scaffolding
+- H2-first heading enforcement
+
+</Update>
+
+## Upgrading
+
+Follow these steps to upgrade Tiew Hoe Ting Documentation smoothly.
+
+<Steps>
+  <Step title="Check Compatibility" icon="check-circle">
+
+    Review changelog for breaking changes.
+
+  </Step>
+  <Step title="Update Package" icon="download">
+
+    Use your preferred package manager.
+
+    <Tabs>
+      <Tab title="npm" icon="package">
+        ```bash
+        npm update @tiewhoeting/docs@latest
+        ```
+      </Tab>
+      <Tab title="yarn" icon="package">
+        ```bash
+        yarn upgrade @tiewhoeting/docs@latest
+        ```
+      </Tab>
+      <Tab title="pnpm" icon="package">
+        ```bash
+        pnpm update @tiewhoeting/docs@latest
+        ```
+      </Tab>
+    </Tabs>
+
+  </Step>
+  <Step title="Rebuild Docs" icon="rocket">
+
+    Clear cache and rebuild.
+
+    <CodeGroup tabs="CLI,Docker">
+      ```bash
+      npm run build
+      ```
+      ```dockerfile
+      docker build -t tiewhoeting/docs .
+      docker run -p 3000:3000 tiewhoeting/docs
+      ```
+    </CodeGroup>
+
+  </Step>
+  <Step title="Verify Changes" icon="shield">
+
+    Test key components like `<Tabs>` and `{tags}` escaping.
+
+  </Step>
+</Steps>
+
+<Expandable title="Advanced Migration" default-open="false">
+
+For projects using custom themes, update your config:
+
+```javascript
+// config.js
+export default {
+  theme: {
+    brandColor: '#3B82F6',
+    components: {
+      Update: { showTags: true }
+    }
+  }
+};
+```
+
+</Expandable>
+
+<Callout kind="tip">
+  After upgrading, validate your MDX files for parsing errors, especially nested code blocks.
+</Callout>

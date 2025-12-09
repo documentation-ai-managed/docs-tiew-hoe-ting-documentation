@@ -1,0 +1,123 @@
+---
+title: Frequently Asked Questions
+description: Common questions and answers to help you navigate Tiew Hoe Ting documentation.
+---
+
+## Overview
+
+You encounter common challenges when managing your Tiew Hoe Ting documentation. This page addresses key areas like account management, troubleshooting, and best practices. Use the expandable sections below to find quick solutions.
+
+<Callout kind="info">
+  Bookmark this page for ongoing reference. Search within your browser for specific keywords to locate answers faster.
+</Callout>
+
+## Account Management
+
+Manage your account settings effectively to maintain access and security.
+
+<ExpandableGroup>
+  <Expandable title="How do I reset my password?" default-open="true">
+    Navigate to the account settings page and select the password reset option. Enter your email address to receive a secure reset link. Follow these steps:
+
+    <Steps>
+      <Step title="Request Link" icon="mail">
+        Click `Forgot Password?` on the login screen.
+      </Step>
+      <Step title="Verify Email" icon="check-circle">
+        Check your inbox (and spam folder) for the reset email.
+      </Step>
+      <Step title="Update Password" icon="lock">
+        Enter a strong password meeting these criteria: at least 12 characters, including uppercase, lowercase, numbers, and symbols.
+      </Step>
+    </Steps>
+  </Expandable>
+
+  <Expandable title="What if I lose access to my email?">
+    Contact support via the help form in the dashboard. Provide your account ID and last known login details for verification. Support responds within 24 hours.
+  </Expandable>
+</ExpandableGroup>
+
+## Troubleshooting Common Issues
+
+Resolve frequent problems with these targeted fixes.
+
+<Tabs>
+  <Tab title="Sync Errors" icon="refresh-cw">
+    Sync issues often stem from network problems. Try these solutions:
+
+    ```bash
+    # Clear local cache
+    tiew-cache clear
+
+    # Restart sync service
+    tiew-sync restart
+    ```
+
+    If persistent, check your firewall settings for outbound connections on port 443.
+  </Tab>
+
+  <Tab title="Upload Failures" icon="upload-cloud">
+    Large files may fail due to size limits. Compress assets or use these commands:
+
+    <CodeGroup tabs="CLI,API">
+    ```bash
+    # Compress before upload
+    zip -r docs.zip ./docs/
+    tiew upload docs.zip --compress
+    ```
+    ```javascript
+    // API upload with progress
+    const formData = new FormData();
+    formData.append('file', file);
+    const response = await fetch('/api/upload', {
+      method: 'POST',
+      body: formData,
+    });
+    ```
+    </CodeGroup>
+  </Tab>
+</Tabs>
+
+<Callout kind="tip" kind="warning">
+  Always back up your documentation before applying troubleshooting steps to avoid data loss.
+</Callout>
+
+## Best Practices for Organization
+
+Organize your documentation for better collaboration and maintenance.
+
+<Columns cols={3}>
+  <Card title="Use Folders" icon="folder" href="#">
+    Create nested folders for projects: `projects/client-a/docs/`, `projects/client-b/api/`.
+  </Card>
+
+  <Card title="Version Control" icon="git-branch" href="#">
+    Integrate with Git: commit changes regularly and use branches for features.
+  </Card>
+
+  <Card title="Tagging System" icon="tag" href="#">
+    Apply tags like `draft`, `published`, `archive` for quick filtering.
+  </Card>
+</Columns>
+
+<Expandable title="Advanced Tagging Example">
+  Implement a tagging script for automation:
+
+  ```javascript
+  // tags.js - Add metadata to MDX files
+  const fs = require('fs');
+  const matter = require('gray-matter');
+
+  const files = fs.readdirSync('./docs');
+  files.forEach(file => {
+    const content = fs.readFileSync(`./docs/${file}`, 'utf8');
+    const parsed = matter(content);
+    parsed.data.tags = ['feature', 'docs'];
+    fs.writeFileSync(`./docs/${file}`, matter.stringify(parsed.content, parsed.data));
+  });
+  ```
+
+  Run with `node tags.js` to batch-update files.
+</Expandable>
+
+For more complex workflows, review your dashboard analytics to identify underused sections and reorganize accordingly. This ensures your Tiew Hoe Ting documentation remains efficient and scalable.
